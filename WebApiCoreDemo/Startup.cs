@@ -27,8 +27,10 @@ namespace WebApiCoreDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Actual conn string stored in secrets.json. Ref: Microsoft.Extensions.SecretManager.Tools
             services.AddDbContext<WebApiDbContext>(options => options.UseSqlServer(
-                Configuration.GetConnectionString("DefaultConnection"))
+                Configuration.GetConnectionString(Configuration.GetConnectionString("DefaultConnection")))
+                //Configuration.GetConnectionString(Configuration.GetConnectionString("AzureWebApiDb")))
             );
             services.AddScoped<IWebApiRepository, WebApiRepository>();
             services.AddSwaggerGen(c => {
@@ -44,7 +46,6 @@ namespace WebApiCoreDemo
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseSwagger();
             app.UseSwaggerUI(c => {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contacts API v1");
