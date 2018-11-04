@@ -6,4 +6,5 @@ A demo WebAPI with Swagger
 Documentation and endpoints at: https://webapicoredemo.azurewebsites.net/
 
 DB Schema: Contacts.sql
+
 Dummy Data: uk-500.csv
