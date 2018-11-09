@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using WebApiCoreDemo.Data;
+using WebApiCoreDemo.Data.Entities;
 
 namespace WebApiCoreDemo
 {
@@ -33,6 +35,7 @@ namespace WebApiCoreDemo
                 //Configuration.GetConnectionString(Configuration.GetConnectionString("AzureWebApiDb")))
             );
             services.AddScoped<IWebApiRepository, WebApiRepository>();
+            services.AddIdentity<ApiUser, IdentityRole>().AddEntityFrameworkStores<WebApiDbContext>();
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new Info { Title = "Contacts API", Version = "v1" });
             });
